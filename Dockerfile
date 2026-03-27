@@ -1,9 +1,9 @@
-FROM php:8.2-cli
+FROM php:8.4-cli
 
-# Install dependencies
+# Install dependencies + intl
 RUN apt-get update && apt-get install -y \
-    git unzip libzip-dev zip curl \
-    && docker-php-ext-install pdo pdo_mysql
+    git unzip libzip-dev zip curl libicu-dev \
+    && docker-php-ext-install pdo pdo_mysql intl
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
